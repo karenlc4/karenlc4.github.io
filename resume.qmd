@@ -1,89 +1,81 @@
 ---
 layout: cv
-title: Isaac Newtons's CV
+title: Karen Castillo's CV
 ---
-# Isaac Newton
-Physicist, Mathematician, Cambridge professor.
-
-<div id="webaddress">
-<a href="isaac@applesdofall.org">isaac@applesdofall.org</a>
-| <a href="http://en.wikipedia.org/wiki/Isaac_Newton">My wikipedia page</a>
-</div>
+# Karen Castillo 
 
 
-## Currently
-
-Standing on the shoulders of giants
-
-### Specialized in
-
-Laws of motion, gravitation, minting coins, disliking [Robert Hooke](http://en.wikipedia.org/wiki/Robert_Hooke)
-
-
-### Research interests
-
-Cooling, power series, optics, alchemy, planetary motions, apples.
-
+385-326-9195 | krnl141198@gmail.com | [linkedin.com/karen-l-castillo](https://www.linkedin.com/karen-l-castillo)
 
 ## Education
 
-`1654-1660`
-__The King's School, Grantham.__
+**Brigham Young University - Idaho**  
+September 2019 - April 2025  
+Bachelor of Science in Data Science  
+Rexburg, ID  
 
-`June 1661 - now`
-__Trinity College, Cambridge__
+- Relevant Coursework: SQL, R, Python, Power BI, Microsoft Excel
 
-- Sizar
+## Professional Experience
 
-`1667 - death`
-__Trinity College, Cambridge__
+**Online Teaching Assistant- MATH 221**  
+*Brigham Young University Idaho*  
+January 2024 - Present  
+Rexburg, ID  
 
-- Fellow
+- Assist online statistics instructor by grading assignments and projects promptly and providing constructive feedback to enhance students’ learning and performance
+- Conduct exam review sessions to aid students’ preparation, ensuring comprehension of key concepts and addressing areas of concern
+- Offer comprehensive support to students encountering difficulties with statistical concepts, delivering personalized assistance and explanations during one-on-one sessions
+
+**Online Teaching Assistant-Grader**  
+*Brigham Young University Idaho*  
+January 2022 - April 2023  
+Rexburg, ID  
+
+- Evaluated and graded 500+ student’s assignments weekly following the course rubric
+- Checked for errors or inconsistencies on 500+ student’s assignments weekly
+- Held regular communication with supervisor to be aware of changes in grading, deadlines, and new features on Power Apps grading
+
+**Activities and Involvement Manager**  
+*Brigham Young University Idaho*  
+August 2020 – December 2022  
+Rexburg, ID  
+
+- Resolved participants’ questions and issues by phone, email, and in person
+- Persuaded 100+ students to participate in campus programs
+- Inspired 100+ students in campus activities to enhance academic and social wellness
+- Managed, filtered and organized student database to improve access, and communication between school and students
+
+**Online Teaching Assistant- ME 142**  
+*Brigham Young University Idaho*  
+January 2022 - April 2022  
+Rexburg, ID  
+
+- Reviewed students’ progress and provided appropriate feedback on VBA (Visual Basic for Applications) assignments
+- Held regular office hours to assist students with the assignments
+- Checked assignments and provided grades according to the course rubric
+
+**Student Intern-Assembly Operator**  
+*Polaris*  
+July 2021 - November 2021  
+Roseau, MN  
+
+- Prepared and built-up vehicle parts, subsystems, and components
+- Installed subsystems, parts, and components into a vehicle on a moving assembly line
+- Performed checks and inspections to ensure good quality
+- Used and operated various power tools, hoists, and production equipment
+
+## Volunteer Experience
+
+**Full-time Volunteer Representative**  
+*The Church of Jesus Christ of Latter-Day Saints*  
+January 2018 - August 2019  
+Arcadia, CA  
+
+- Devised lesson plans and strategies to help hundreds of people reach personal goals and make changes to improve lives
+- Planned training meetings for 40+ full-time volunteers to learn how to help people solve daily difficulties
+- Mentored 8+ full-time volunteers by giving feedback and motivating during training
 
 
 
-## Awards
 
-`2012`
-President, *Royal Society*, London, UK
-
-Associate, *French Academy of Science*, Paris, France
-
-
-
-## Publications
-
-<!-- A list is also available [online](http://scholar.google.co.uk/citations?user=LTOTl0YAAAAJ) -->
-
-### Journals
-
-`1669`
-Newton Sir I, De analysi per æquationes numero terminorum infinitas. 
-
-`1669`
-Lectiones opticæ.
-
-etc. etc. etc.
-
-### Patents
-
-`2012`
-Infinitesimal calculus for solutions to physics problems, [SMBC](http://www.techdirt.com/articles/20121011/09312820678/if-patents-had-been-around-time-newton.shtml) patent 001
-
-
-## Occupation
-
-`1600`
-__Royal Mint__, London
-
-- Warden
-- Minted coins
-
-`1600`
-__Lucasian professor of Mathematics__, Cambridge University
-
-
-
-<!-- ### Footer
-
-Last updated: May 2013 -->
