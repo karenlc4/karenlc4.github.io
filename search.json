@@ -1,226 +1,229 @@
 [
   {
-    "objectID": "story_telling.html",
-    "href": "story_telling.html",
+    "objectID": "family_search.html",
+    "href": "family_search.html",
+    "title": "%%",
+    "section": "",
+    "text": "%%\n\n\nImport necessary libraries\nimport pandas as pd import re import matplotlib.pyplot as plt\n\n\nLoad the CSV file with low_memory=False to avoid the mixed types warning\ndf = pd.read_csv(r’C:Search(5).csv’, low_memory=False)\n\n\nStep 1: Data Exploration and Initial Inspection\nprint(“Initial Data Exploration:”) print(df[[‘245\\(f-Inclusive dates']].head(10))  # Preview the first 10 rows\nprint(f\"Missing values in '245\\)f-Inclusive dates’: {df[‘245\\(f-Inclusive dates'].isnull().sum()}\")\nprint(f\"Unique values in '245\\)f-Inclusive dates’: {df[‘245$f-Inclusive dates’].unique()[:10]}“) # Preview unique values\n\n\nStep 2: Categorize Date Patterns\ndef categorize_date_pattern(date): if pd.isnull(date): return ‘Missing’ elif re.match(r’^-\\(', date):  # Match date ranges like \"1990-1995\"\n        return 'Date Range'\n    elif re.match(r'^\\d{4}\\)‘, date): # Match single years like “2005” return ’Single Year’ else: return ‘Other’ # Catch all for other formats like “1902 /”, “Unknown”, etc.\ndf[‘date_pattern’] = df[‘245$f-Inclusive dates’].apply(categorize_date_pattern)\n\n\nCount the occurrences of each date pattern\ndate_pattern_counts = df[‘date_pattern’].value_counts()\n\n\nCalculate the total count of date patterns\ntotal_date_patterns = date_pattern_counts.sum()\n\n\nCreate a DataFrame to store the count and percentage\ndate_pattern_df = pd.DataFrame(date_pattern_counts).reset_index() date_pattern_df.columns = [‘Date Pattern’, ‘Count’]\n\n\nCalculate the percentage for each pattern\ndate_pattern_df[‘Overall Percentage’] = (date_pattern_df[‘Count’] / total_date_patterns) * 100 date_pattern_df[‘Overall Percentage’] = date_pattern_df[‘Overall Percentage’].apply(lambda x: f”{x:.2f}%“)\n\n\nDisplay the final table\nprint(“Pattern Counts with Overall Percentage:”) print(date_pattern_df.to_string(index=False))\n\n\nStep 3: Plotting Date Pattern Distribution\nplt.figure(figsize=(10, 7)) bars = plt.bar(date_pattern_counts.index, date_pattern_counts.values, color=[‘blue’, ‘green’, ‘orange’, ‘red’]) plt.xlabel(‘Date Pattern Category’) plt.ylabel(‘Count of Records’) plt.title(‘Distribution of Date Patterns in 245$f-Inclusive dates Column’) plt.xticks(rotation=45)\n\n\nAdd annotations\nannotations = { ‘Missing’: ‘Examples:…’, ‘Date Range’: ‘Examples:“1549-1802”,“1675-1811”’, ‘Single Year’: ‘Examples:“1703”,“1905”’, ‘Other’: ‘Examples:“1585-1624, 1768-1804”,“3/15/1900 1:00”,“1624-1840 :”’ } for i, bar in enumerate(bars): yval = bar.get_height() category = date_pattern_counts.index[i]\nexample_text = annotations[category]\nplt.text(bar.get_x() + bar.get_width() / 2, yval + 5000, example_text, ha=‘center’, va=‘bottom’, fontsize=10)\nplt.show()\n\n\n\n\n\nData Cleaning and Special Character Analysis\n\n\n\n\n\nStep 4: Define Cleaning Functions\n\n\nFunction to remove non-special characters\ndef remove_non_special_chars(df: pd.DataFrame, column_name: str) -&gt; pd.DataFrame: pattern = r”[@_!#$%&*()&lt;&gt;?/|}{~:]” # Keep only the specified special characters df[column_name] = df[column_name].str.replace(pattern, ““, regex=True) return df\n\n\nFunction to remove numbers\ndef remove_numbers(df: pd.DataFrame, column_name: str) -&gt; pd.DataFrame: pattern = r” # Remove digits df[column_name] = df[column_name].str.replace(pattern, ““, regex=True) return df\n\n\nApply cleaning functions to the ‘245\\(f-Inclusive dates' column\ndf['245\\)f-Cleaned’] = df[‘245\\(f-Inclusive dates']  # Create a copy for cleaning\ndf = remove_non_special_chars(df, '245\\)f-Cleaned’)\ndf = remove_numbers(df, ‘245$f-Cleaned’)\nprint(“Data Example:”) print(df[[‘245\\(f-Inclusive dates', '245\\)f-Cleaned’]].head(10))\n\n\nStep 5: Analyze Cleaned Data for Special Characters\n\n\nFunction to find all special characters in the column\ndef find_all_special_characters(column_data): all_chars = set() for entry in column_data.dropna(): special_chars = re.findall(r”[^a-zA-Z0-9\\s]“, entry) # Find all special characters all_chars.update(special_chars) return all_chars\n\n\nFunction to count special characters\ndef count_special_characters(column_data, special_chars): char_counts = {char: 0 for char in special_chars} total_count = 0 for entry in column_data.dropna(): for char in entry: if char in char_counts: char_counts[char] += 1 total_count += 1 return char_counts, total_count\n\n\nFunction to calculate percentage of each character\ndef calculate_percentage(char_counts, total_count): char_data = [] for char, count in char_counts.items(): if count &gt; 0: percentage = (count / total_count) * 100 char_data.append([char, count, f”{percentage:.2f}%”]) return pd.DataFrame(char_data, columns=[‘Character’, ‘Count’, ‘Overall Percentage’])\n\n\nPerform Special Character Analysis\ncleaned_column_data = df[‘245$f-Cleaned’] all_special_chars = find_all_special_characters(cleaned_column_data) char_counts, total_count = count_special_characters(cleaned_column_data, all_special_chars) char_df = calculate_percentage(char_counts, total_count)\n\n\nDisplay the special character table\nprint(“Character Analysis:”) print(char_df.to_string(index=False))\n\n\nVerify that percentages sum to 100%\ntotal_percentage = sum([float(pct.strip(‘%’)) for pct in char_df[‘Overall Percentage’]]) print(f”Percentage: {total_percentage:.2f}%“)\n\n\nStep 1: Filter the DataFrame to focus only on rows where the ‘date_pattern’ is “Other”\ndf_other = df[df[‘date_pattern’] == ‘Other’].copy()\n\n\nStep 2: Identify how many unique patterns exist in the “245\\(f-Inclusive dates\" column for \"Other\" category\nunique_patterns_in_other = df_other['245\\)f-Inclusive dates’].nunique()\n\n\nStep 3: Display the number of unique patterns in the “Other” category\nprint(f”number of unique patterns in ‘Other’ category: {unique_patterns_in_other}“)\n\n\nStep 4: Display a few examples of the unique patterns in the “Other” category\nprint(“of unique patterns in ‘Other’ category:”) print(df_other[‘245$f-Inclusive dates’].unique()[:10]) # Show the first 10 unique patterns\n\n\nFunction to categorize ‘Other’ date patterns with additional cases\ndef categorize_other_pattern(date): if pd.isnull(date): return ‘Missing’ # Match date ranges with commas like “1585-1624, 1768-1804” elif re.match(r’^-,?-\\(', date):\n        return 'Date Range with Commas'\n    # Match datetime formats like \"3/15/1900 1:00\"\n    elif re.match(r'^\\d{1,2}/\\d{1,2}/\\d{4}\\s\\d{1,2}:\\d{2}', date):\n        return 'Datetime Format'\n    # Match date ranges with colons or periods at the end like \"1624-1840:\", \"1872-1923.\"\n    elif re.match(r'^\\d{4}-\\d{4}\\s?[.:]\\)‘, date): return ’Date Range with End Punctuation’ # Match date ranges with semicolons and indexes like “1800-1860; index,1802-1881” elif re.match(r’^-;?index,-\\(', date):\n        return 'Date Range with Semicolon and Index'\n    # Match single years with commas like \"1829, 1839\"\n    elif re.match(r'^\\d{4},\\s?\\d{4}\\)‘, date): return ’Single Years with Comma’ # Match incomplete date formats like “1803-1902 /” or “1969 /” elif re.match(r’^-?/\\(', date) or re.match(r'^\\d{4}\\s?/\\)‘, date): return ’Incomplete Date Range’ # Match single years followed by periods like “1872-1923.” elif re.match(r’^-?[.]\\(', date) or re.match(r'^\\d{4}\\s?[.]\\)‘, date): return ’Single Year with End Punctuation’ # Match dates with multiple dashes like “1772–2007” elif re.match(r’^–\\(', date):\n        return 'Date Range with Multiple Dashes'\n    # Match improper date formatting with no delimiters like \"18801890\", \"19071922\"\n    elif re.match(r'^\\d{8}\\)‘, date): return ’Dates with Missing Delimiters’ # Match shorter improper formats like “18251838” or “900-1834” elif re.match(r’^-$‘, date): return ’Improper Date Range’ else: return ‘Other Unspecified Pattern’\n\n\n%%\n\n\nStep 1: Filter the DataFrame to focus only on rows where the original ‘date_pattern’ is “Other”\ndf_other = df[df[‘date_pattern’] == ‘Other’].copy()\n\n\nStep 2: Apply the function to create a new column ‘Other_pattern’ for the detected patterns\ndf_other[‘Other_pattern’] = df_other[‘245$f-Inclusive dates’].apply(categorize_other_pattern)\n\n\nStep 3: Count the occurrences of each pattern in the “Other_pattern” column\nother_pattern_counts = df_other[‘Other_pattern’].value_counts()\n\n\nStep 4: Display the pattern counts\nprint(“Counts in ‘Other’ Category:”) print(other_pattern_counts)\n\n\nStep 5: View specific examples of rows with the “Date Range with Commas” pattern\ndate_range_with_commas = df_other[df_other[‘Other_pattern’] == ‘Date Range with Commas’] print(“of ‘Date Range with Commas’ pattern:”) print(date_range_with_commas[[‘245$f-Inclusive dates’]].head())\n\n\n%%\n\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "cleansing.html",
+    "href": "cleansing.html",
     "title": "about me",
     "section": "",
     "text": "MarkDown Basics",
     "crumbs": [
-      "Story Telling"
+      "Data Cleansing"
     ]
   },
   {
-    "objectID": "story_telling.html#title-2-header",
-    "href": "story_telling.html#title-2-header",
+    "objectID": "cleansing.html#title-2-header",
+    "href": "cleansing.html#title-2-header",
     "title": "about me",
     "section": "",
     "text": "MarkDown Basics",
     "crumbs": [
-      "Story Telling"
+      "Data Cleansing"
     ]
   },
   {
-    "objectID": "Competition/project1.html",
-    "href": "Competition/project1.html",
+    "objectID": "Competition/project2.html",
+    "href": "Competition/project2.html",
     "title": "Client Report - [Insert Project Title]",
     "section": "",
     "text": "Paste in a template\n\n\n\n\n Back to top",
     "crumbs": [
       "Competition",
-      "Project 1"
+      "Project 2"
     ]
   },
   {
-    "objectID": "Competition/project4.html",
-    "href": "Competition/project4.html",
+    "objectID": "Competition/project3.html",
+    "href": "Competition/project3.html",
     "title": "Client Report - [Insert Project Title]",
     "section": "",
     "text": "Paste in a template\n\n\n\n\n Back to top",
     "crumbs": [
       "Competition",
-      "Project 4"
+      "Project 3"
     ]
   },
   {
-    "objectID": "Competition/project5.html",
-    "href": "Competition/project5.html",
-    "title": "Client Report - [Insert Project Title]",
-    "section": "",
-    "text": "Paste in a template\n\n\n\n\n Back to top",
-    "crumbs": [
-      "Competition",
-      "Project 5"
-    ]
-  },
-  {
-    "objectID": "Cleansing_Exploration/project1.html",
-    "href": "Cleansing_Exploration/project1.html",
-    "title": "Client Report - [Insert Project Title]",
-    "section": "",
-    "text": "Paste in a template\n\n\n\n\n Back to top"
-  },
-  {
-    "objectID": "Cleansing_Exploration/project4.html",
-    "href": "Cleansing_Exploration/project4.html",
-    "title": "Client Report - [Insert Project Title]",
-    "section": "",
-    "text": "Paste in a template\n\n\n\n\n Back to top"
-  },
-  {
-    "objectID": "Cleansing_Exploration/project5.html",
-    "href": "Cleansing_Exploration/project5.html",
-    "title": "Client Report - [Insert Project Title]",
-    "section": "",
-    "text": "Paste in a template\n\n\n\n\n Back to top"
-  },
-  {
-    "objectID": "competition.html",
-    "href": "competition.html",
+    "objectID": "ml.html",
+    "href": "ml.html",
     "title": "about me",
     "section": "",
     "text": "MarkDown Basics",
     "crumbs": [
-      "Competition"
+      "Machine Learning"
     ]
   },
   {
-    "objectID": "competition.html#title-2-header",
-    "href": "competition.html#title-2-header",
+    "objectID": "ml.html#title-2-header",
+    "href": "ml.html#title-2-header",
     "title": "about me",
     "section": "",
     "text": "MarkDown Basics",
     "crumbs": [
-      "Competition"
+      "Machine Learning"
     ]
   },
   {
-    "objectID": "Full_Stack/project2.html",
-    "href": "Full_Stack/project2.html",
+    "objectID": "Cleansing_Exploration/project2.html",
+    "href": "Cleansing_Exploration/project2.html",
+    "title": "Client Report - [Insert Project Title]",
+    "section": "",
+    "text": "Paste in a template\n\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "Cleansing_Exploration/project3.html",
+    "href": "Cleansing_Exploration/project3.html",
+    "title": "Client Report - [Insert Project Title]",
+    "section": "",
+    "text": "Paste in a template\n\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "about me",
+    "section": "",
+    "text": "MarkDown Basics"
+  },
+  {
+    "objectID": "index.html#title-2-header",
+    "href": "index.html#title-2-header",
+    "title": "about me",
+    "section": "",
+    "text": "MarkDown Basics"
+  },
+  {
+    "objectID": "Full_Stack/project1.html",
+    "href": "Full_Stack/project1.html",
     "title": "Client Report - [Insert Project Title]",
     "section": "",
     "text": "Paste in a template\n\n\n\n\n Back to top",
     "crumbs": [
       "Full Stack",
-      "Project 2"
+      "Project 1"
     ]
   },
   {
-    "objectID": "Full_Stack/project3.html",
-    "href": "Full_Stack/project3.html",
+    "objectID": "Full_Stack/project4.html",
+    "href": "Full_Stack/project4.html",
     "title": "Client Report - [Insert Project Title]",
     "section": "",
     "text": "Paste in a template\n\n\n\n\n Back to top",
     "crumbs": [
       "Full Stack",
-      "Project 3"
-    ]
-  },
-  {
-    "objectID": "Machine_Learning/project1.html",
-    "href": "Machine_Learning/project1.html",
-    "title": "Client Report - [Insert Project Title]",
-    "section": "",
-    "text": "Paste in a template\n\n\n\n\n Back to top",
-    "crumbs": [
-      "Machine Learning",
-      "Project 1"
-    ]
-  },
-  {
-    "objectID": "Machine_Learning/project4.html",
-    "href": "Machine_Learning/project4.html",
-    "title": "Client Report - [Insert Project Title]",
-    "section": "",
-    "text": "Paste in a template\n\n\n\n\n Back to top",
-    "crumbs": [
-      "Machine Learning",
       "Project 4"
     ]
   },
   {
-    "objectID": "Machine_Learning/project5.html",
-    "href": "Machine_Learning/project5.html",
+    "objectID": "Full_Stack/project5.html",
+    "href": "Full_Stack/project5.html",
+    "title": "Client Report - [Insert Project Title]",
+    "section": "",
+    "text": "Paste in a template\n\n\n\n\n Back to top",
+    "crumbs": [
+      "Full Stack",
+      "Project 5"
+    ]
+  },
+  {
+    "objectID": "Machine_Learning/project2.html",
+    "href": "Machine_Learning/project2.html",
     "title": "Client Report - [Insert Project Title]",
     "section": "",
     "text": "Paste in a template\n\n\n\n\n Back to top",
     "crumbs": [
       "Machine Learning",
-      "Project 5"
-    ]
-  },
-  {
-    "objectID": "Cleansing_Projects/project2.html",
-    "href": "Cleansing_Projects/project2.html",
-    "title": "Client Report - [Insert Project Title]",
-    "section": "",
-    "text": "Paste in a template\n\n\n\n\n Back to top",
-    "crumbs": [
-      "Data Cleansing",
       "Project 2"
     ]
   },
   {
-    "objectID": "Cleansing_Projects/project3.html",
-    "href": "Cleansing_Projects/project3.html",
+    "objectID": "Machine_Learning/project3.html",
+    "href": "Machine_Learning/project3.html",
+    "title": "Client Report - [Insert Project Title]",
+    "section": "",
+    "text": "Paste in a template\n\n\n\n\n Back to top",
+    "crumbs": [
+      "Machine Learning",
+      "Project 3"
+    ]
+  },
+  {
+    "objectID": "Cleansing_Projects/project1.html",
+    "href": "Cleansing_Projects/project1.html",
     "title": "Client Report - [Insert Project Title]",
     "section": "",
     "text": "Paste in a template\n\n\n\n\n Back to top",
     "crumbs": [
       "Data Cleansing",
-      "Project 3"
-    ]
-  },
-  {
-    "objectID": "Story_Telling/project1.html",
-    "href": "Story_Telling/project1.html",
-    "title": "Client Report - [Insert Project Title]",
-    "section": "",
-    "text": "Paste in a template\n\n\n\n\n Back to top",
-    "crumbs": [
-      "Story Telling",
       "Project 1"
     ]
   },
   {
-    "objectID": "Story_Telling/project4.html",
-    "href": "Story_Telling/project4.html",
+    "objectID": "Cleansing_Projects/project4.html",
+    "href": "Cleansing_Projects/project4.html",
     "title": "Client Report - [Insert Project Title]",
     "section": "",
     "text": "Paste in a template\n\n\n\n\n Back to top",
     "crumbs": [
-      "Story Telling",
+      "Data Cleansing",
       "Project 4"
     ]
   },
   {
-    "objectID": "Story_Telling/project5.html",
-    "href": "Story_Telling/project5.html",
+    "objectID": "Cleansing_Projects/project5.html",
+    "href": "Cleansing_Projects/project5.html",
+    "title": "Client Report - [Insert Project Title]",
+    "section": "",
+    "text": "Paste in a template\n\n\n\n\n Back to top",
+    "crumbs": [
+      "Data Cleansing",
+      "Project 5"
+    ]
+  },
+  {
+    "objectID": "Story_Telling/project2.html",
+    "href": "Story_Telling/project2.html",
     "title": "Client Report - [Insert Project Title]",
     "section": "",
     "text": "Paste in a template\n\n\n\n\n Back to top",
     "crumbs": [
       "Story Telling",
-      "Project 5"
+      "Project 2"
     ]
   },
   {
-    "objectID": "full_stack.html",
-    "href": "full_stack.html",
+    "objectID": "Story_Telling/project3.html",
+    "href": "Story_Telling/project3.html",
+    "title": "Client Report - [Insert Project Title]",
+    "section": "",
+    "text": "Paste in a template\n\n\n\n\n Back to top",
+    "crumbs": [
+      "Story Telling",
+      "Project 3"
+    ]
+  },
+  {
+    "objectID": "exploration.html",
+    "href": "exploration.html",
     "title": "about me",
     "section": "",
     "text": "MarkDown Basics",
     "crumbs": [
-      "Full Stack"
+      "Data Exploration"
     ]
   },
   {
-    "objectID": "full_stack.html#title-2-header",
-    "href": "full_stack.html#title-2-header",
+    "objectID": "exploration.html#title-2-header",
+    "href": "exploration.html#title-2-header",
     "title": "about me",
     "section": "",
     "text": "MarkDown Basics",
     "crumbs": [
-      "Full Stack"
+      "Data Exploration"
     ]
   },
   {
@@ -252,223 +255,227 @@
     "text": "Full-time Volunteer Representative\nThe Church of Jesus Christ of Latter-Day Saints\nJanuary 2018 - August 2019\nArcadia, CA\n\nDevised lesson plans and strategies to help hundreds of people reach personal goals and make changes to improve lives\nPlanned training meetings for 40+ full-time volunteers to learn how to help people solve daily difficulties\nMentored 8+ full-time volunteers by giving feedback and motivating during training"
   },
   {
-    "objectID": "exploration.html",
-    "href": "exploration.html",
+    "objectID": "full_stack.html",
+    "href": "full_stack.html",
     "title": "about me",
     "section": "",
     "text": "MarkDown Basics",
     "crumbs": [
-      "Data Exploration"
+      "Full Stack"
     ]
   },
   {
-    "objectID": "exploration.html#title-2-header",
-    "href": "exploration.html#title-2-header",
+    "objectID": "full_stack.html#title-2-header",
+    "href": "full_stack.html#title-2-header",
     "title": "about me",
     "section": "",
     "text": "MarkDown Basics",
     "crumbs": [
-      "Data Exploration"
+      "Full Stack"
     ]
   },
   {
-    "objectID": "Story_Telling/project3.html",
-    "href": "Story_Telling/project3.html",
+    "objectID": "Story_Telling/project5.html",
+    "href": "Story_Telling/project5.html",
     "title": "Client Report - [Insert Project Title]",
     "section": "",
     "text": "Paste in a template\n\n\n\n\n Back to top",
     "crumbs": [
       "Story Telling",
-      "Project 3"
+      "Project 5"
     ]
   },
   {
-    "objectID": "Story_Telling/project2.html",
-    "href": "Story_Telling/project2.html",
+    "objectID": "Story_Telling/project4.html",
+    "href": "Story_Telling/project4.html",
     "title": "Client Report - [Insert Project Title]",
     "section": "",
     "text": "Paste in a template\n\n\n\n\n Back to top",
     "crumbs": [
       "Story Telling",
-      "Project 2"
-    ]
-  },
-  {
-    "objectID": "Cleansing_Projects/project5.html",
-    "href": "Cleansing_Projects/project5.html",
-    "title": "Client Report - [Insert Project Title]",
-    "section": "",
-    "text": "Paste in a template\n\n\n\n\n Back to top",
-    "crumbs": [
-      "Data Cleansing",
-      "Project 5"
-    ]
-  },
-  {
-    "objectID": "Cleansing_Projects/project4.html",
-    "href": "Cleansing_Projects/project4.html",
-    "title": "Client Report - [Insert Project Title]",
-    "section": "",
-    "text": "Paste in a template\n\n\n\n\n Back to top",
-    "crumbs": [
-      "Data Cleansing",
       "Project 4"
     ]
   },
   {
-    "objectID": "Cleansing_Projects/project1.html",
-    "href": "Cleansing_Projects/project1.html",
+    "objectID": "Story_Telling/project1.html",
+    "href": "Story_Telling/project1.html",
+    "title": "Client Report - [Insert Project Title]",
+    "section": "",
+    "text": "Paste in a template\n\n\n\n\n Back to top",
+    "crumbs": [
+      "Story Telling",
+      "Project 1"
+    ]
+  },
+  {
+    "objectID": "Cleansing_Projects/project3.html",
+    "href": "Cleansing_Projects/project3.html",
     "title": "Client Report - [Insert Project Title]",
     "section": "",
     "text": "Paste in a template\n\n\n\n\n Back to top",
     "crumbs": [
       "Data Cleansing",
-      "Project 1"
+      "Project 3"
     ]
   },
   {
-    "objectID": "Machine_Learning/project3.html",
-    "href": "Machine_Learning/project3.html",
+    "objectID": "Cleansing_Projects/project2.html",
+    "href": "Cleansing_Projects/project2.html",
+    "title": "Client Report - [Insert Project Title]",
+    "section": "",
+    "text": "Paste in a template\n\n\n\n\n Back to top",
+    "crumbs": [
+      "Data Cleansing",
+      "Project 2"
+    ]
+  },
+  {
+    "objectID": "Machine_Learning/project5.html",
+    "href": "Machine_Learning/project5.html",
     "title": "Client Report - [Insert Project Title]",
     "section": "",
     "text": "Paste in a template\n\n\n\n\n Back to top",
     "crumbs": [
       "Machine Learning",
-      "Project 3"
+      "Project 5"
     ]
   },
   {
-    "objectID": "Machine_Learning/project2.html",
-    "href": "Machine_Learning/project2.html",
+    "objectID": "Machine_Learning/project4.html",
+    "href": "Machine_Learning/project4.html",
     "title": "Client Report - [Insert Project Title]",
     "section": "",
     "text": "Paste in a template\n\n\n\n\n Back to top",
     "crumbs": [
       "Machine Learning",
-      "Project 2"
-    ]
-  },
-  {
-    "objectID": "Full_Stack/project5.html",
-    "href": "Full_Stack/project5.html",
-    "title": "Client Report - [Insert Project Title]",
-    "section": "",
-    "text": "Paste in a template\n\n\n\n\n Back to top",
-    "crumbs": [
-      "Full Stack",
-      "Project 5"
-    ]
-  },
-  {
-    "objectID": "Full_Stack/project4.html",
-    "href": "Full_Stack/project4.html",
-    "title": "Client Report - [Insert Project Title]",
-    "section": "",
-    "text": "Paste in a template\n\n\n\n\n Back to top",
-    "crumbs": [
-      "Full Stack",
       "Project 4"
     ]
   },
   {
-    "objectID": "Full_Stack/project1.html",
-    "href": "Full_Stack/project1.html",
+    "objectID": "Machine_Learning/project1.html",
+    "href": "Machine_Learning/project1.html",
+    "title": "Client Report - [Insert Project Title]",
+    "section": "",
+    "text": "Paste in a template\n\n\n\n\n Back to top",
+    "crumbs": [
+      "Machine Learning",
+      "Project 1"
+    ]
+  },
+  {
+    "objectID": "Full_Stack/project3.html",
+    "href": "Full_Stack/project3.html",
     "title": "Client Report - [Insert Project Title]",
     "section": "",
     "text": "Paste in a template\n\n\n\n\n Back to top",
     "crumbs": [
       "Full Stack",
-      "Project 1"
-    ]
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "about me",
-    "section": "",
-    "text": "MarkDown Basics"
-  },
-  {
-    "objectID": "index.html#title-2-header",
-    "href": "index.html#title-2-header",
-    "title": "about me",
-    "section": "",
-    "text": "MarkDown Basics"
-  },
-  {
-    "objectID": "Cleansing_Exploration/project3.html",
-    "href": "Cleansing_Exploration/project3.html",
-    "title": "Client Report - [Insert Project Title]",
-    "section": "",
-    "text": "Paste in a template\n\n\n\n\n Back to top"
-  },
-  {
-    "objectID": "Cleansing_Exploration/project2.html",
-    "href": "Cleansing_Exploration/project2.html",
-    "title": "Client Report - [Insert Project Title]",
-    "section": "",
-    "text": "Paste in a template\n\n\n\n\n Back to top"
-  },
-  {
-    "objectID": "ml.html",
-    "href": "ml.html",
-    "title": "about me",
-    "section": "",
-    "text": "MarkDown Basics",
-    "crumbs": [
-      "Machine Learning"
-    ]
-  },
-  {
-    "objectID": "ml.html#title-2-header",
-    "href": "ml.html#title-2-header",
-    "title": "about me",
-    "section": "",
-    "text": "MarkDown Basics",
-    "crumbs": [
-      "Machine Learning"
-    ]
-  },
-  {
-    "objectID": "Competition/project3.html",
-    "href": "Competition/project3.html",
-    "title": "Client Report - [Insert Project Title]",
-    "section": "",
-    "text": "Paste in a template\n\n\n\n\n Back to top",
-    "crumbs": [
-      "Competition",
       "Project 3"
     ]
   },
   {
-    "objectID": "Competition/project2.html",
-    "href": "Competition/project2.html",
+    "objectID": "Full_Stack/project2.html",
+    "href": "Full_Stack/project2.html",
+    "title": "Client Report - [Insert Project Title]",
+    "section": "",
+    "text": "Paste in a template\n\n\n\n\n Back to top",
+    "crumbs": [
+      "Full Stack",
+      "Project 2"
+    ]
+  },
+  {
+    "objectID": "competition.html",
+    "href": "competition.html",
+    "title": "about me",
+    "section": "",
+    "text": "MarkDown Basics",
+    "crumbs": [
+      "Competition"
+    ]
+  },
+  {
+    "objectID": "competition.html#title-2-header",
+    "href": "competition.html#title-2-header",
+    "title": "about me",
+    "section": "",
+    "text": "MarkDown Basics",
+    "crumbs": [
+      "Competition"
+    ]
+  },
+  {
+    "objectID": "Cleansing_Exploration/project5.html",
+    "href": "Cleansing_Exploration/project5.html",
+    "title": "Client Report - [Insert Project Title]",
+    "section": "",
+    "text": "Paste in a template\n\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "Cleansing_Exploration/project4.html",
+    "href": "Cleansing_Exploration/project4.html",
+    "title": "Client Report - [Insert Project Title]",
+    "section": "",
+    "text": "Paste in a template\n\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "Cleansing_Exploration/project1.html",
+    "href": "Cleansing_Exploration/project1.html",
+    "title": "Client Report - [Insert Project Title]",
+    "section": "",
+    "text": "Paste in a template\n\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "Competition/project5.html",
+    "href": "Competition/project5.html",
     "title": "Client Report - [Insert Project Title]",
     "section": "",
     "text": "Paste in a template\n\n\n\n\n Back to top",
     "crumbs": [
       "Competition",
-      "Project 2"
+      "Project 5"
     ]
   },
   {
-    "objectID": "cleansing.html",
-    "href": "cleansing.html",
+    "objectID": "Competition/project4.html",
+    "href": "Competition/project4.html",
+    "title": "Client Report - [Insert Project Title]",
+    "section": "",
+    "text": "Paste in a template\n\n\n\n\n Back to top",
+    "crumbs": [
+      "Competition",
+      "Project 4"
+    ]
+  },
+  {
+    "objectID": "Competition/project1.html",
+    "href": "Competition/project1.html",
+    "title": "Client Report - [Insert Project Title]",
+    "section": "",
+    "text": "Paste in a template\n\n\n\n\n Back to top",
+    "crumbs": [
+      "Competition",
+      "Project 1"
+    ]
+  },
+  {
+    "objectID": "story_telling.html",
+    "href": "story_telling.html",
     "title": "about me",
     "section": "",
     "text": "MarkDown Basics",
     "crumbs": [
-      "Data Cleansing"
+      "Story Telling"
     ]
   },
   {
-    "objectID": "cleansing.html#title-2-header",
-    "href": "cleansing.html#title-2-header",
+    "objectID": "story_telling.html#title-2-header",
+    "href": "story_telling.html#title-2-header",
     "title": "about me",
     "section": "",
     "text": "MarkDown Basics",
     "crumbs": [
-      "Data Cleansing"
+      "Story Telling"
     ]
   }
 ]
