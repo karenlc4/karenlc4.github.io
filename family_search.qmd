@@ -1,21 +1,37 @@
-# %%
+# %% [markdown]
+# # Family Search Data Analysis
+# 
+# This script performs the following steps:
+# 1. **Data Exploration**: Initial data inspection and cleaning.
+# 2. **Date Pattern Categorization**: Categorizes patterns found in the "245$f-Inclusive dates" column.
+# 3. **Data Visualization**: Visualizes the distribution of date patterns.
+# 4. **Data Cleaning**: Focuses on removing non-special characters and analyzing special characters.
+# 5. **'Other' Pattern Analysis**: Dives deeper into patterns categorized as "Other."
+
+# %% 
 # Import necessary libraries
 import pandas as pd
 import re
 import matplotlib.pyplot as plt
 
+# %% [markdown]
+# ## Step 1: Load and Explore the Data
 
-# Load the CSV file with low_memory=False to avoid the mixed types warning
+# %%
+# Load the CSV file with low_memory=False to avoid mixed types warnings
 df = pd.read_csv(r'C:\BYUI\Family Search\combined (5).csv', low_memory=False)
 
-# Step 1: Data Exploration and Initial Inspection
+# Initial Data Exploration
 print("Initial Data Exploration:")
 print(df[['245$f-Inclusive dates']].head(10))  # Preview the first 10 rows
 print(f"Missing values in '245$f-Inclusive dates': {df['245$f-Inclusive dates'].isnull().sum()}")
-print(f"Unique values in '245$f-Inclusive dates': {df['245$f-Inclusive dates'].unique()[:10]}")  # Preview unique values
+print(f"Unique values in '245$f-Inclusive dates': {df['245$f-Inclusive dates'].unique()[:10]}")
 
+# %% [markdown]
+# ## Step 2: Categorize Date Patterns
 
-# Step 2: Categorize Date Patterns
+# %%
+# Function to categorize date patterns
 def categorize_date_pattern(date):
     if pd.isnull(date):
         return 'Missing'
@@ -24,8 +40,9 @@ def categorize_date_pattern(date):
     elif re.match(r'^\d{4}$', date):  # Match single years like "2005"
         return 'Single Year'
     else:
-        return 'Other'  # Catch all for other formats like "1902 /", "Unknown", etc.
+        return 'Other'  # Catch-all for other formats like "1902 /", "Unknown", etc.
 
+# Apply the categorization
 df['date_pattern'] = df['245$f-Inclusive dates'].apply(categorize_date_pattern)
 
 # Count the occurrences of each date pattern
@@ -46,8 +63,11 @@ date_pattern_df['Overall Percentage'] = date_pattern_df['Overall Percentage'].ap
 print("\nDate Pattern Counts with Overall Percentage:")
 print(date_pattern_df.to_string(index=False))
 
+# %% [markdown]
+# ## Step 3: Visualize Date Pattern Distribution
 
-# Step 3: Plotting Date Pattern Distribution
+# %%
+# Plot the distribution of date patterns
 plt.figure(figsize=(10, 7))
 bars = plt.bar(date_pattern_counts.index, date_pattern_counts.values, color=['blue', 'green', 'orange', 'red'])
 plt.xlabel('Date Pattern Category')
@@ -55,7 +75,7 @@ plt.ylabel('Count of Records')
 plt.title('Distribution of Date Patterns in 245$f-Inclusive dates Column')
 plt.xticks(rotation=45)
 
-# Add annotations
+# Add annotations for better readability
 annotations = {
     'Missing': 'Examples:\nNaN\n...',
     'Date Range': 'Examples:\n"1549-1802",\n"1675-1811"',
@@ -70,12 +90,11 @@ for i, bar in enumerate(bars):
 
 plt.show()
 
+# %% [markdown]
+# ## Step 4: Data Cleaning and Special Character Analysis
 
-######################################
-# Data Cleaning and Special Character Analysis
-######################################
-
-# Step 4: Define Cleaning Functions
+# %%
+# Define functions for cleaning and special character analysis
 
 # Function to remove non-special characters
 def remove_non_special_chars(df: pd.DataFrame, column_name: str) -> pd.DataFrame:
@@ -97,10 +116,11 @@ df = remove_numbers(df, '245$f-Cleaned')
 print("\nCleaned Data Example:")
 print(df[['245$f-Inclusive dates', '245$f-Cleaned']].head(10))
 
+# %% [markdown]
+# ## Step 5: Analyze Cleaned Data for Special Characters
 
-# Step 5: Analyze Cleaned Data for Special Characters
-
-# Function to find all special characters in the column
+# %%
+# Function to find all special characters
 def find_all_special_characters(column_data):
     all_chars = set()
     for entry in column_data.dropna():
@@ -128,35 +148,39 @@ def calculate_percentage(char_counts, total_count):
             char_data.append([char, count, f"{percentage:.2f}%"])
     return pd.DataFrame(char_data, columns=['Character', 'Count', 'Overall Percentage'])
 
-# Perform Special Character Analysis
+# Analyze special characters
 cleaned_column_data = df['245$f-Cleaned']
 all_special_chars = find_all_special_characters(cleaned_column_data)
 char_counts, total_count = count_special_characters(cleaned_column_data, all_special_chars)
 char_df = calculate_percentage(char_counts, total_count)
 
-# Display the special character table
+# Display the special character analysis
 print("\nSpecial Character Analysis:")
 print(char_df.to_string(index=False))
 
-# Verify that percentages sum to 100%
+# Verify percentages sum to 100%
 total_percentage = sum([float(pct.strip('%')) for pct in char_df['Overall Percentage']])
 print(f"\nTotal Percentage: {total_percentage:.2f}%")
 
+# %% [markdown]
+# ## Step 6: Deeper Dive into 'Other' Date Patterns
 
-# Step 1: Filter the DataFrame to focus only on rows where the 'date_pattern' is "Other"
+# %%
+# Filter the DataFrame to focus on 'Other' category
 df_other = df[df['date_pattern'] == 'Other'].copy()
 
-# Step 2: Identify how many unique patterns exist in the "245$f-Inclusive dates" column for "Other" category
+# Identify unique patterns in the 'Other' category
 unique_patterns_in_other = df_other['245$f-Inclusive dates'].nunique()
 
-# Step 3: Display the number of unique patterns in the "Other" category
+# Display the unique patterns
 print(f"\nTotal number of unique patterns in 'Other' category: {unique_patterns_in_other}")
-
-# Step 4: Display a few examples of the unique patterns in the "Other" category
 print("\nExamples of unique patterns in 'Other' category:")
 print(df_other['245$f-Inclusive dates'].unique()[:10])  # Show the first 10 unique patterns
 
+# %% [markdown]
+# ## Step 7: Categorize 'Other' Date Patterns with Additional Cases
 
+# %%
 # Function to categorize 'Other' date patterns with additional cases
 def categorize_other_pattern(date):
     if pd.isnull(date):
@@ -171,6 +195,8 @@ def categorize_other_pattern(date):
     elif re.match(r'^\d{4}-\d{4}\s?[.:]$', date):
         return 'Date Range with End Punctuation'
     # Match date ranges with semicolons and indexes like "1800-1860; index,1802-1881"
+    elif
+
     elif re.match(r'^\d{4}-\d{4};\s?index,\d{4}-\d{4}$', date):
         return 'Date Range with Semicolon and Index'
     # Match single years with commas like "1829, 1839"
