@@ -169,45 +169,72 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#section" id="toc-section" class="nav-link active" data-scroll-target="#section">%%</a></li>
+  <li><a href="#markdown" id="toc-markdown" class="nav-link active" data-scroll-target="#markdown">%% [markdown]</a></li>
+  <li><a href="#family-search-data-analysis" id="toc-family-search-data-analysis" class="nav-link" data-scroll-target="#family-search-data-analysis"># Family Search Data Analysis</a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
+  <li><a href="#this-script-performs-the-following-steps" id="toc-this-script-performs-the-following-steps" class="nav-link" data-scroll-target="#this-script-performs-the-following-steps">This script performs the following steps:</a></li>
+  <li><a href="#data-exploration-initial-data-inspection-and-cleaning." id="toc-data-exploration-initial-data-inspection-and-cleaning." class="nav-link" data-scroll-target="#data-exploration-initial-data-inspection-and-cleaning.">1. <strong>Data Exploration</strong>: Initial data inspection and cleaning.</a></li>
+  <li><a href="#date-pattern-categorization-categorizes-patterns-found-in-the-245f-inclusive-dates-column." id="toc-date-pattern-categorization-categorizes-patterns-found-in-the-245f-inclusive-dates-column." class="nav-link" data-scroll-target="#date-pattern-categorization-categorizes-patterns-found-in-the-245f-inclusive-dates-column.">2. <strong>Date Pattern Categorization</strong>: Categorizes patterns found in the “245$f-Inclusive dates” column.</a></li>
+  <li><a href="#data-visualization-visualizes-the-distribution-of-date-patterns." id="toc-data-visualization-visualizes-the-distribution-of-date-patterns." class="nav-link" data-scroll-target="#data-visualization-visualizes-the-distribution-of-date-patterns.">3. <strong>Data Visualization</strong>: Visualizes the distribution of date patterns.</a></li>
+  <li><a href="#data-cleaning-focuses-on-removing-non-special-characters-and-analyzing-special-characters." id="toc-data-cleaning-focuses-on-removing-non-special-characters-and-analyzing-special-characters." class="nav-link" data-scroll-target="#data-cleaning-focuses-on-removing-non-special-characters-and-analyzing-special-characters.">4. <strong>Data Cleaning</strong>: Focuses on removing non-special characters and analyzing special characters.</a></li>
+  <li><a href="#other-pattern-analysis-dives-deeper-into-patterns-categorized-as-other." id="toc-other-pattern-analysis-dives-deeper-into-patterns-categorized-as-other." class="nav-link" data-scroll-target="#other-pattern-analysis-dives-deeper-into-patterns-categorized-as-other.">5. <strong>‘Other’ Pattern Analysis</strong>: Dives deeper into patterns categorized as “Other.”</a></li>
+  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1">%%</a></li>
   <li><a href="#import-necessary-libraries" id="toc-import-necessary-libraries" class="nav-link" data-scroll-target="#import-necessary-libraries">Import necessary libraries</a></li>
-  <li><a href="#load-the-csv-file-with-low_memoryfalse-to-avoid-the-mixed-types-warning" id="toc-load-the-csv-file-with-low_memoryfalse-to-avoid-the-mixed-types-warning" class="nav-link" data-scroll-target="#load-the-csv-file-with-low_memoryfalse-to-avoid-the-mixed-types-warning">Load the CSV file with low_memory=False to avoid the mixed types warning</a></li>
-  <li><a href="#step-1-data-exploration-and-initial-inspection" id="toc-step-1-data-exploration-and-initial-inspection" class="nav-link" data-scroll-target="#step-1-data-exploration-and-initial-inspection">Step 1: Data Exploration and Initial Inspection</a></li>
-  <li><a href="#step-2-categorize-date-patterns" id="toc-step-2-categorize-date-patterns" class="nav-link" data-scroll-target="#step-2-categorize-date-patterns">Step 2: Categorize Date Patterns</a></li>
+  <li><a href="#markdown-1" id="toc-markdown-1" class="nav-link" data-scroll-target="#markdown-1">%% [markdown]</a></li>
+  <li><a href="#step-1-load-and-explore-the-data" id="toc-step-1-load-and-explore-the-data" class="nav-link" data-scroll-target="#step-1-load-and-explore-the-data">## Step 1: Load and Explore the Data</a></li>
+  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2">%%</a></li>
+  <li><a href="#load-the-csv-file-with-low_memoryfalse-to-avoid-mixed-types-warnings" id="toc-load-the-csv-file-with-low_memoryfalse-to-avoid-mixed-types-warnings" class="nav-link" data-scroll-target="#load-the-csv-file-with-low_memoryfalse-to-avoid-mixed-types-warnings">Load the CSV file with low_memory=False to avoid mixed types warnings</a></li>
+  <li><a href="#initial-data-exploration" id="toc-initial-data-exploration" class="nav-link" data-scroll-target="#initial-data-exploration">Initial Data Exploration</a></li>
+  <li><a href="#markdown-2" id="toc-markdown-2" class="nav-link" data-scroll-target="#markdown-2">%% [markdown]</a></li>
+  <li><a href="#step-2-categorize-date-patterns" id="toc-step-2-categorize-date-patterns" class="nav-link" data-scroll-target="#step-2-categorize-date-patterns">## Step 2: Categorize Date Patterns</a></li>
+  <li><a href="#section-3" id="toc-section-3" class="nav-link" data-scroll-target="#section-3">%%</a></li>
+  <li><a href="#function-to-categorize-date-patterns" id="toc-function-to-categorize-date-patterns" class="nav-link" data-scroll-target="#function-to-categorize-date-patterns">Function to categorize date patterns</a></li>
+  <li><a href="#apply-the-categorization" id="toc-apply-the-categorization" class="nav-link" data-scroll-target="#apply-the-categorization">Apply the categorization</a></li>
   <li><a href="#count-the-occurrences-of-each-date-pattern" id="toc-count-the-occurrences-of-each-date-pattern" class="nav-link" data-scroll-target="#count-the-occurrences-of-each-date-pattern">Count the occurrences of each date pattern</a></li>
   <li><a href="#calculate-the-total-count-of-date-patterns" id="toc-calculate-the-total-count-of-date-patterns" class="nav-link" data-scroll-target="#calculate-the-total-count-of-date-patterns">Calculate the total count of date patterns</a></li>
   <li><a href="#create-a-dataframe-to-store-the-count-and-percentage" id="toc-create-a-dataframe-to-store-the-count-and-percentage" class="nav-link" data-scroll-target="#create-a-dataframe-to-store-the-count-and-percentage">Create a DataFrame to store the count and percentage</a></li>
   <li><a href="#calculate-the-percentage-for-each-pattern" id="toc-calculate-the-percentage-for-each-pattern" class="nav-link" data-scroll-target="#calculate-the-percentage-for-each-pattern">Calculate the percentage for each pattern</a></li>
   <li><a href="#display-the-final-table" id="toc-display-the-final-table" class="nav-link" data-scroll-target="#display-the-final-table">Display the final table</a></li>
-  <li><a href="#step-3-plotting-date-pattern-distribution" id="toc-step-3-plotting-date-pattern-distribution" class="nav-link" data-scroll-target="#step-3-plotting-date-pattern-distribution">Step 3: Plotting Date Pattern Distribution</a></li>
-  <li><a href="#add-annotations" id="toc-add-annotations" class="nav-link" data-scroll-target="#add-annotations">Add annotations</a></li>
-  <li><a href="#data-cleaning-and-special-character-analysis" id="toc-data-cleaning-and-special-character-analysis" class="nav-link" data-scroll-target="#data-cleaning-and-special-character-analysis">Data Cleaning and Special Character Analysis</a></li>
-  <li><a href="#step-4-define-cleaning-functions" id="toc-step-4-define-cleaning-functions" class="nav-link" data-scroll-target="#step-4-define-cleaning-functions">Step 4: Define Cleaning Functions</a></li>
+  <li><a href="#markdown-3" id="toc-markdown-3" class="nav-link" data-scroll-target="#markdown-3">%% [markdown]</a></li>
+  <li><a href="#step-3-visualize-date-pattern-distribution" id="toc-step-3-visualize-date-pattern-distribution" class="nav-link" data-scroll-target="#step-3-visualize-date-pattern-distribution">## Step 3: Visualize Date Pattern Distribution</a></li>
+  <li><a href="#section-4" id="toc-section-4" class="nav-link" data-scroll-target="#section-4">%%</a></li>
+  <li><a href="#plot-the-distribution-of-date-patterns" id="toc-plot-the-distribution-of-date-patterns" class="nav-link" data-scroll-target="#plot-the-distribution-of-date-patterns">Plot the distribution of date patterns</a></li>
+  <li><a href="#add-annotations-for-better-readability" id="toc-add-annotations-for-better-readability" class="nav-link" data-scroll-target="#add-annotations-for-better-readability">Add annotations for better readability</a></li>
+  <li><a href="#markdown-4" id="toc-markdown-4" class="nav-link" data-scroll-target="#markdown-4">%% [markdown]</a></li>
+  <li><a href="#step-4-data-cleaning-and-special-character-analysis" id="toc-step-4-data-cleaning-and-special-character-analysis" class="nav-link" data-scroll-target="#step-4-data-cleaning-and-special-character-analysis">## Step 4: Data Cleaning and Special Character Analysis</a></li>
+  <li><a href="#section-5" id="toc-section-5" class="nav-link" data-scroll-target="#section-5">%%</a></li>
+  <li><a href="#define-functions-for-cleaning-and-special-character-analysis" id="toc-define-functions-for-cleaning-and-special-character-analysis" class="nav-link" data-scroll-target="#define-functions-for-cleaning-and-special-character-analysis">Define functions for cleaning and special character analysis</a></li>
   <li><a href="#function-to-remove-non-special-characters" id="toc-function-to-remove-non-special-characters" class="nav-link" data-scroll-target="#function-to-remove-non-special-characters">Function to remove non-special characters</a></li>
   <li><a href="#function-to-remove-numbers" id="toc-function-to-remove-numbers" class="nav-link" data-scroll-target="#function-to-remove-numbers">Function to remove numbers</a></li>
   <li><a href="#apply-cleaning-functions-to-the-245f-inclusive-dates-column-df245f-cleaned-df245f-inclusive-dates-create-a-copy-for-cleaning-df-remove_non_special_charsdf-245f-cleaned" id="toc-apply-cleaning-functions-to-the-245f-inclusive-dates-column-df245f-cleaned-df245f-inclusive-dates-create-a-copy-for-cleaning-df-remove_non_special_charsdf-245f-cleaned" class="nav-link" data-scroll-target="#apply-cleaning-functions-to-the-245f-inclusive-dates-column-df245f-cleaned-df245f-inclusive-dates-create-a-copy-for-cleaning-df-remove_non_special_charsdf-245f-cleaned">Apply cleaning functions to the ‘245<span class="math inline">\(f-Inclusive dates' column
   df['245\)</span>f-Cleaned’] = df[‘245<span class="math inline">\(f-Inclusive dates']  # Create a copy for cleaning
   df = remove_non_special_chars(df, '245\)</span>f-Cleaned’)</a></li>
-  <li><a href="#step-5-analyze-cleaned-data-for-special-characters" id="toc-step-5-analyze-cleaned-data-for-special-characters" class="nav-link" data-scroll-target="#step-5-analyze-cleaned-data-for-special-characters">Step 5: Analyze Cleaned Data for Special Characters</a></li>
-  <li><a href="#function-to-find-all-special-characters-in-the-column" id="toc-function-to-find-all-special-characters-in-the-column" class="nav-link" data-scroll-target="#function-to-find-all-special-characters-in-the-column">Function to find all special characters in the column</a></li>
+  <li><a href="#markdown-5" id="toc-markdown-5" class="nav-link" data-scroll-target="#markdown-5">%% [markdown]</a></li>
+  <li><a href="#step-5-analyze-cleaned-data-for-special-characters" id="toc-step-5-analyze-cleaned-data-for-special-characters" class="nav-link" data-scroll-target="#step-5-analyze-cleaned-data-for-special-characters">## Step 5: Analyze Cleaned Data for Special Characters</a></li>
+  <li><a href="#section-6" id="toc-section-6" class="nav-link" data-scroll-target="#section-6">%%</a></li>
+  <li><a href="#function-to-find-all-special-characters" id="toc-function-to-find-all-special-characters" class="nav-link" data-scroll-target="#function-to-find-all-special-characters">Function to find all special characters</a></li>
   <li><a href="#function-to-count-special-characters" id="toc-function-to-count-special-characters" class="nav-link" data-scroll-target="#function-to-count-special-characters">Function to count special characters</a></li>
   <li><a href="#function-to-calculate-percentage-of-each-character" id="toc-function-to-calculate-percentage-of-each-character" class="nav-link" data-scroll-target="#function-to-calculate-percentage-of-each-character">Function to calculate percentage of each character</a></li>
-  <li><a href="#perform-special-character-analysis" id="toc-perform-special-character-analysis" class="nav-link" data-scroll-target="#perform-special-character-analysis">Perform Special Character Analysis</a></li>
-  <li><a href="#display-the-special-character-table" id="toc-display-the-special-character-table" class="nav-link" data-scroll-target="#display-the-special-character-table">Display the special character table</a></li>
-  <li><a href="#verify-that-percentages-sum-to-100" id="toc-verify-that-percentages-sum-to-100" class="nav-link" data-scroll-target="#verify-that-percentages-sum-to-100">Verify that percentages sum to 100%</a></li>
-  <li><a href="#step-1-filter-the-dataframe-to-focus-only-on-rows-where-the-date_pattern-is-other" id="toc-step-1-filter-the-dataframe-to-focus-only-on-rows-where-the-date_pattern-is-other" class="nav-link" data-scroll-target="#step-1-filter-the-dataframe-to-focus-only-on-rows-where-the-date_pattern-is-other">Step 1: Filter the DataFrame to focus only on rows where the ‘date_pattern’ is “Other”</a></li>
-  <li><a href="#step-2-identify-how-many-unique-patterns-exist-in-the-245f-inclusive-dates-column-for-other-category-unique_patterns_in_other-df_other245f-inclusive-dates.nunique" id="toc-step-2-identify-how-many-unique-patterns-exist-in-the-245f-inclusive-dates-column-for-other-category-unique_patterns_in_other-df_other245f-inclusive-dates.nunique" class="nav-link" data-scroll-target="#step-2-identify-how-many-unique-patterns-exist-in-the-245f-inclusive-dates-column-for-other-category-unique_patterns_in_other-df_other245f-inclusive-dates.nunique">Step 2: Identify how many unique patterns exist in the “245<span class="math inline">\(f-Inclusive dates" column for "Other" category
-  unique_patterns_in_other = df_other['245\)</span>f-Inclusive dates’].nunique()</a></li>
-  <li><a href="#step-3-display-the-number-of-unique-patterns-in-the-other-category" id="toc-step-3-display-the-number-of-unique-patterns-in-the-other-category" class="nav-link" data-scroll-target="#step-3-display-the-number-of-unique-patterns-in-the-other-category">Step 3: Display the number of unique patterns in the “Other” category</a></li>
-  <li><a href="#step-4-display-a-few-examples-of-the-unique-patterns-in-the-other-category" id="toc-step-4-display-a-few-examples-of-the-unique-patterns-in-the-other-category" class="nav-link" data-scroll-target="#step-4-display-a-few-examples-of-the-unique-patterns-in-the-other-category">Step 4: Display a few examples of the unique patterns in the “Other” category</a></li>
+  <li><a href="#analyze-special-characters" id="toc-analyze-special-characters" class="nav-link" data-scroll-target="#analyze-special-characters">Analyze special characters</a></li>
+  <li><a href="#display-the-special-character-analysis" id="toc-display-the-special-character-analysis" class="nav-link" data-scroll-target="#display-the-special-character-analysis">Display the special character analysis</a></li>
+  <li><a href="#verify-percentages-sum-to-100" id="toc-verify-percentages-sum-to-100" class="nav-link" data-scroll-target="#verify-percentages-sum-to-100">Verify percentages sum to 100%</a></li>
+  <li><a href="#markdown-6" id="toc-markdown-6" class="nav-link" data-scroll-target="#markdown-6">%% [markdown]</a></li>
+  <li><a href="#step-6-deeper-dive-into-other-date-patterns" id="toc-step-6-deeper-dive-into-other-date-patterns" class="nav-link" data-scroll-target="#step-6-deeper-dive-into-other-date-patterns">## Step 6: Deeper Dive into ‘Other’ Date Patterns</a></li>
+  <li><a href="#section-7" id="toc-section-7" class="nav-link" data-scroll-target="#section-7">%%</a></li>
+  <li><a href="#filter-the-dataframe-to-focus-on-other-category" id="toc-filter-the-dataframe-to-focus-on-other-category" class="nav-link" data-scroll-target="#filter-the-dataframe-to-focus-on-other-category">Filter the DataFrame to focus on ‘Other’ category</a></li>
+  <li><a href="#identify-unique-patterns-in-the-other-category" id="toc-identify-unique-patterns-in-the-other-category" class="nav-link" data-scroll-target="#identify-unique-patterns-in-the-other-category">Identify unique patterns in the ‘Other’ category</a></li>
+  <li><a href="#display-the-unique-patterns" id="toc-display-the-unique-patterns" class="nav-link" data-scroll-target="#display-the-unique-patterns">Display the unique patterns</a></li>
+  <li><a href="#markdown-7" id="toc-markdown-7" class="nav-link" data-scroll-target="#markdown-7">%% [markdown]</a></li>
+  <li><a href="#step-7-categorize-other-date-patterns-with-additional-cases" id="toc-step-7-categorize-other-date-patterns-with-additional-cases" class="nav-link" data-scroll-target="#step-7-categorize-other-date-patterns-with-additional-cases">## Step 7: Categorize ‘Other’ Date Patterns with Additional Cases</a></li>
+  <li><a href="#section-8" id="toc-section-8" class="nav-link" data-scroll-target="#section-8">%%</a></li>
   <li><a href="#function-to-categorize-other-date-patterns-with-additional-cases" id="toc-function-to-categorize-other-date-patterns-with-additional-cases" class="nav-link" data-scroll-target="#function-to-categorize-other-date-patterns-with-additional-cases">Function to categorize ‘Other’ date patterns with additional cases</a></li>
-  <li><a href="#section-3" id="toc-section-3" class="nav-link" data-scroll-target="#section-3">%%</a></li>
+  <li><a href="#section-9" id="toc-section-9" class="nav-link" data-scroll-target="#section-9">%%</a></li>
   <li><a href="#step-1-filter-the-dataframe-to-focus-only-on-rows-where-the-original-date_pattern-is-other" id="toc-step-1-filter-the-dataframe-to-focus-only-on-rows-where-the-original-date_pattern-is-other" class="nav-link" data-scroll-target="#step-1-filter-the-dataframe-to-focus-only-on-rows-where-the-original-date_pattern-is-other">Step 1: Filter the DataFrame to focus only on rows where the original ‘date_pattern’ is “Other”</a></li>
   <li><a href="#step-2-apply-the-function-to-create-a-new-column-other_pattern-for-the-detected-patterns" id="toc-step-2-apply-the-function-to-create-a-new-column-other_pattern-for-the-detected-patterns" class="nav-link" data-scroll-target="#step-2-apply-the-function-to-create-a-new-column-other_pattern-for-the-detected-patterns">Step 2: Apply the function to create a new column ‘Other_pattern’ for the detected patterns</a></li>
   <li><a href="#step-3-count-the-occurrences-of-each-pattern-in-the-other_pattern-column" id="toc-step-3-count-the-occurrences-of-each-pattern-in-the-other_pattern-column" class="nav-link" data-scroll-target="#step-3-count-the-occurrences-of-each-pattern-in-the-other_pattern-column">Step 3: Count the occurrences of each pattern in the “Other_pattern” column</a></li>
   <li><a href="#step-4-display-the-pattern-counts" id="toc-step-4-display-the-pattern-counts" class="nav-link" data-scroll-target="#step-4-display-the-pattern-counts">Step 4: Display the pattern counts</a></li>
   <li><a href="#step-5-view-specific-examples-of-rows-with-the-date-range-with-commas-pattern" id="toc-step-5-view-specific-examples-of-rows-with-the-date-range-with-commas-pattern" class="nav-link" data-scroll-target="#step-5-view-specific-examples-of-rows-with-the-date-range-with-commas-pattern">Step 5: View specific examples of rows with the “Date Range with Commas” pattern</a></li>
-  <li><a href="#section-4" id="toc-section-4" class="nav-link" data-scroll-target="#section-4">%%</a></li>
+  <li><a href="#section-10" id="toc-section-10" class="nav-link" data-scroll-target="#section-10">%%</a></li>
   </ul>
 </nav>
     </div>
@@ -217,28 +244,76 @@ window.Quarto = {
 
 
 
+<section id="markdown" class="level1">
+<h1>%% [markdown]</h1>
+</section>
+<section id="family-search-data-analysis" class="level1">
+<h1># Family Search Data Analysis</h1>
+</section>
 <section id="section" class="level1">
+<h1></h1>
+</section>
+<section id="this-script-performs-the-following-steps" class="level1">
+<h1>This script performs the following steps:</h1>
+</section>
+<section id="data-exploration-initial-data-inspection-and-cleaning." class="level1">
+<h1>1. <strong>Data Exploration</strong>: Initial data inspection and cleaning.</h1>
+</section>
+<section id="date-pattern-categorization-categorizes-patterns-found-in-the-245f-inclusive-dates-column." class="level1">
+<h1>2. <strong>Date Pattern Categorization</strong>: Categorizes patterns found in the “245$f-Inclusive dates” column.</h1>
+</section>
+<section id="data-visualization-visualizes-the-distribution-of-date-patterns." class="level1">
+<h1>3. <strong>Data Visualization</strong>: Visualizes the distribution of date patterns.</h1>
+</section>
+<section id="data-cleaning-focuses-on-removing-non-special-characters-and-analyzing-special-characters." class="level1">
+<h1>4. <strong>Data Cleaning</strong>: Focuses on removing non-special characters and analyzing special characters.</h1>
+</section>
+<section id="other-pattern-analysis-dives-deeper-into-patterns-categorized-as-other." class="level1">
+<h1>5. <strong>‘Other’ Pattern Analysis</strong>: Dives deeper into patterns categorized as “Other.”</h1>
+</section>
+<section id="section-1" class="level1">
 <h1>%%</h1>
 </section>
 <section id="import-necessary-libraries" class="level1">
 <h1>Import necessary libraries</h1>
 <p>import pandas as pd import re import matplotlib.pyplot as plt</p>
 </section>
-<section id="load-the-csv-file-with-low_memoryfalse-to-avoid-the-mixed-types-warning" class="level1">
-<h1>Load the CSV file with low_memory=False to avoid the mixed types warning</h1>
+<section id="markdown-1" class="level1">
+<h1>%% [markdown]</h1>
+</section>
+<section id="step-1-load-and-explore-the-data" class="level1">
+<h1>## Step 1: Load and Explore the Data</h1>
+</section>
+<section id="section-2" class="level1">
+<h1>%%</h1>
+</section>
+<section id="load-the-csv-file-with-low_memoryfalse-to-avoid-mixed-types-warnings" class="level1">
+<h1>Load the CSV file with low_memory=False to avoid mixed types warnings</h1>
 <p>df = pd.read_csv(r’C:Search(5).csv’, low_memory=False)</p>
 </section>
-<section id="step-1-data-exploration-and-initial-inspection" class="level1">
-<h1>Step 1: Data Exploration and Initial Inspection</h1>
+<section id="initial-data-exploration" class="level1">
+<h1>Initial Data Exploration</h1>
 <p>print(“Initial Data Exploration:”) print(df[[‘245<span class="math inline">\(f-Inclusive dates']].head(10))  # Preview the first 10 rows
 print(f"Missing values in '245\)</span>f-Inclusive dates’: {df[‘245<span class="math inline">\(f-Inclusive dates'].isnull().sum()}")
-print(f"Unique values in '245\)</span>f-Inclusive dates’: {df[‘245$f-Inclusive dates’].unique()[:10]}“) # Preview unique values</p>
+print(f"Unique values in '245\)</span>f-Inclusive dates’: {df[‘245$f-Inclusive dates’].unique()[:10]}“)</p>
+</section>
+<section id="markdown-2" class="level1">
+<h1>%% [markdown]</h1>
 </section>
 <section id="step-2-categorize-date-patterns" class="level1">
-<h1>Step 2: Categorize Date Patterns</h1>
+<h1>## Step 2: Categorize Date Patterns</h1>
+</section>
+<section id="section-3" class="level1">
+<h1>%%</h1>
+</section>
+<section id="function-to-categorize-date-patterns" class="level1">
+<h1>Function to categorize date patterns</h1>
 <p>def categorize_date_pattern(date): if pd.isnull(date): return ‘Missing’ elif re.match(r’^-<span class="math inline">\(', date):  # Match date ranges like "1990-1995"
         return 'Date Range'
-    elif re.match(r'^\d{4}\)</span>‘, date): # Match single years like “2005” return ’Single Year’ else: return ‘Other’ # Catch all for other formats like “1902 /”, “Unknown”, etc.</p>
+    elif re.match(r'^\d{4}\)</span>‘, date): # Match single years like “2005” return ’Single Year’ else: return ‘Other’ # Catch-all for other formats like “1902 /”, “Unknown”, etc.</p>
+</section>
+<section id="apply-the-categorization" class="level1">
+<h1>Apply the categorization</h1>
 <p>df[‘date_pattern’] = df[‘245$f-Inclusive dates’].apply(categorize_date_pattern)</p>
 </section>
 <section id="count-the-occurrences-of-each-date-pattern" class="level1">
@@ -261,28 +336,37 @@ print(f"Unique values in '245\)</span>f-Inclusive dates’: {df[‘245$f-Inclusi
 <h1>Display the final table</h1>
 <p>print(“Pattern Counts with Overall Percentage:”) print(date_pattern_df.to_string(index=False))</p>
 </section>
-<section id="step-3-plotting-date-pattern-distribution" class="level1">
-<h1>Step 3: Plotting Date Pattern Distribution</h1>
+<section id="markdown-3" class="level1">
+<h1>%% [markdown]</h1>
+</section>
+<section id="step-3-visualize-date-pattern-distribution" class="level1">
+<h1>## Step 3: Visualize Date Pattern Distribution</h1>
+</section>
+<section id="section-4" class="level1">
+<h1>%%</h1>
+</section>
+<section id="plot-the-distribution-of-date-patterns" class="level1">
+<h1>Plot the distribution of date patterns</h1>
 <p>plt.figure(figsize=(10, 7)) bars = plt.bar(date_pattern_counts.index, date_pattern_counts.values, color=[‘blue’, ‘green’, ‘orange’, ‘red’]) plt.xlabel(‘Date Pattern Category’) plt.ylabel(‘Count of Records’) plt.title(‘Distribution of Date Patterns in 245$f-Inclusive dates Column’) plt.xticks(rotation=45)</p>
 </section>
-<section id="add-annotations" class="level1">
-<h1>Add annotations</h1>
+<section id="add-annotations-for-better-readability" class="level1">
+<h1>Add annotations for better readability</h1>
 <p>annotations = { ‘Missing’: ‘Examples:…’, ‘Date Range’: ‘Examples:“1549-1802”,“1675-1811”’, ‘Single Year’: ‘Examples:“1703”,“1905”’, ‘Other’: ‘Examples:“1585-1624, 1768-1804”,“3/15/1900 1:00”,“1624-1840 :”’ } for i, bar in enumerate(bars): yval = bar.get_height() category = date_pattern_counts.index[i]<br>
 example_text = annotations[category]<br>
 plt.text(bar.get_x() + bar.get_width() / 2, yval + 5000, example_text, ha=‘center’, va=‘bottom’, fontsize=10)</p>
 <p>plt.show()</p>
-<section id="section-1" class="level38">
-<p class="heading"></p>
 </section>
+<section id="markdown-4" class="level1">
+<h1>%% [markdown]</h1>
 </section>
-<section id="data-cleaning-and-special-character-analysis" class="level1">
-<h1>Data Cleaning and Special Character Analysis</h1>
-<section id="section-2" class="level38">
-<p class="heading"></p>
+<section id="step-4-data-cleaning-and-special-character-analysis" class="level1">
+<h1>## Step 4: Data Cleaning and Special Character Analysis</h1>
 </section>
+<section id="section-5" class="level1">
+<h1>%%</h1>
 </section>
-<section id="step-4-define-cleaning-functions" class="level1">
-<h1>Step 4: Define Cleaning Functions</h1>
+<section id="define-functions-for-cleaning-and-special-character-analysis" class="level1">
+<h1>Define functions for cleaning and special character analysis</h1>
 </section>
 <section id="function-to-remove-non-special-characters" class="level1">
 <h1>Function to remove non-special characters</h1>
@@ -299,11 +383,17 @@ df = remove_non_special_chars(df, '245\)</span>f-Cleaned’)</h1>
 <p>df = remove_numbers(df, ‘245$f-Cleaned’)</p>
 <p>print(“Data Example:”) print(df[[‘245<span class="math inline">\(f-Inclusive dates', '245\)</span>f-Cleaned’]].head(10))</p>
 </section>
-<section id="step-5-analyze-cleaned-data-for-special-characters" class="level1">
-<h1>Step 5: Analyze Cleaned Data for Special Characters</h1>
+<section id="markdown-5" class="level1">
+<h1>%% [markdown]</h1>
 </section>
-<section id="function-to-find-all-special-characters-in-the-column" class="level1">
-<h1>Function to find all special characters in the column</h1>
+<section id="step-5-analyze-cleaned-data-for-special-characters" class="level1">
+<h1>## Step 5: Analyze Cleaned Data for Special Characters</h1>
+</section>
+<section id="section-6" class="level1">
+<h1>%%</h1>
+</section>
+<section id="function-to-find-all-special-characters" class="level1">
+<h1>Function to find all special characters</h1>
 <p>def find_all_special_characters(column_data): all_chars = set() for entry in column_data.dropna(): special_chars = re.findall(r”[^a-zA-Z0-9\s]“, entry) # Find all special characters all_chars.update(special_chars) return all_chars</p>
 </section>
 <section id="function-to-count-special-characters" class="level1">
@@ -314,33 +404,47 @@ df = remove_non_special_chars(df, '245\)</span>f-Cleaned’)</h1>
 <h1>Function to calculate percentage of each character</h1>
 <p>def calculate_percentage(char_counts, total_count): char_data = [] for char, count in char_counts.items(): if count &gt; 0: percentage = (count / total_count) * 100 char_data.append([char, count, f”{percentage:.2f}%”]) return pd.DataFrame(char_data, columns=[‘Character’, ‘Count’, ‘Overall Percentage’])</p>
 </section>
-<section id="perform-special-character-analysis" class="level1">
-<h1>Perform Special Character Analysis</h1>
+<section id="analyze-special-characters" class="level1">
+<h1>Analyze special characters</h1>
 <p>cleaned_column_data = df[‘245$f-Cleaned’] all_special_chars = find_all_special_characters(cleaned_column_data) char_counts, total_count = count_special_characters(cleaned_column_data, all_special_chars) char_df = calculate_percentage(char_counts, total_count)</p>
 </section>
-<section id="display-the-special-character-table" class="level1">
-<h1>Display the special character table</h1>
+<section id="display-the-special-character-analysis" class="level1">
+<h1>Display the special character analysis</h1>
 <p>print(“Character Analysis:”) print(char_df.to_string(index=False))</p>
 </section>
-<section id="verify-that-percentages-sum-to-100" class="level1">
-<h1>Verify that percentages sum to 100%</h1>
+<section id="verify-percentages-sum-to-100" class="level1">
+<h1>Verify percentages sum to 100%</h1>
 <p>total_percentage = sum([float(pct.strip(‘%’)) for pct in char_df[‘Overall Percentage’]]) print(f”Percentage: {total_percentage:.2f}%“)</p>
 </section>
-<section id="step-1-filter-the-dataframe-to-focus-only-on-rows-where-the-date_pattern-is-other" class="level1">
-<h1>Step 1: Filter the DataFrame to focus only on rows where the ‘date_pattern’ is “Other”</h1>
+<section id="markdown-6" class="level1">
+<h1>%% [markdown]</h1>
+</section>
+<section id="step-6-deeper-dive-into-other-date-patterns" class="level1">
+<h1>## Step 6: Deeper Dive into ‘Other’ Date Patterns</h1>
+</section>
+<section id="section-7" class="level1">
+<h1>%%</h1>
+</section>
+<section id="filter-the-dataframe-to-focus-on-other-category" class="level1">
+<h1>Filter the DataFrame to focus on ‘Other’ category</h1>
 <p>df_other = df[df[‘date_pattern’] == ‘Other’].copy()</p>
 </section>
-<section id="step-2-identify-how-many-unique-patterns-exist-in-the-245f-inclusive-dates-column-for-other-category-unique_patterns_in_other-df_other245f-inclusive-dates.nunique" class="level1">
-<h1>Step 2: Identify how many unique patterns exist in the “245<span class="math inline">\(f-Inclusive dates" column for "Other" category
-unique_patterns_in_other = df_other['245\)</span>f-Inclusive dates’].nunique()</h1>
+<section id="identify-unique-patterns-in-the-other-category" class="level1">
+<h1>Identify unique patterns in the ‘Other’ category</h1>
+<p>unique_patterns_in_other = df_other[‘245$f-Inclusive dates’].nunique()</p>
 </section>
-<section id="step-3-display-the-number-of-unique-patterns-in-the-other-category" class="level1">
-<h1>Step 3: Display the number of unique patterns in the “Other” category</h1>
-<p>print(f”number of unique patterns in ‘Other’ category: {unique_patterns_in_other}“)</p>
+<section id="display-the-unique-patterns" class="level1">
+<h1>Display the unique patterns</h1>
+<p>print(f”number of unique patterns in ‘Other’ category: {unique_patterns_in_other}“) print(”of unique patterns in ‘Other’ category:“) print(df_other[‘245$f-Inclusive dates’].unique()[:10]) # Show the first 10 unique patterns</p>
 </section>
-<section id="step-4-display-a-few-examples-of-the-unique-patterns-in-the-other-category" class="level1">
-<h1>Step 4: Display a few examples of the unique patterns in the “Other” category</h1>
-<p>print(“of unique patterns in ‘Other’ category:”) print(df_other[‘245$f-Inclusive dates’].unique()[:10]) # Show the first 10 unique patterns</p>
+<section id="markdown-7" class="level1">
+<h1>%% [markdown]</h1>
+</section>
+<section id="step-7-categorize-other-date-patterns-with-additional-cases" class="level1">
+<h1>## Step 7: Categorize ‘Other’ Date Patterns with Additional Cases</h1>
+</section>
+<section id="section-8" class="level1">
+<h1>%%</h1>
 </section>
 <section id="function-to-categorize-other-date-patterns-with-additional-cases" class="level1">
 <h1>Function to categorize ‘Other’ date patterns with additional cases</h1>
@@ -350,15 +454,31 @@ unique_patterns_in_other = df_other['245\)</span>f-Inclusive dates’].nunique()
     elif re.match(r'^\d{1,2}/\d{1,2}/\d{4}\s\d{1,2}:\d{2}', date):
         return 'Datetime Format'
     # Match date ranges with colons or periods at the end like "1624-1840:", "1872-1923."
-    elif re.match(r'^\d{4}-\d{4}\s?[.:]\)</span>‘, date): return ’Date Range with End Punctuation’ # Match date ranges with semicolons and indexes like “1800-1860; index,1802-1881” elif re.match(r’^-;?index,-<span class="math inline">\(', date):
-        return 'Date Range with Semicolon and Index'
-    # Match single years with commas like "1829, 1839"
-    elif re.match(r'^\d{4},\s?\d{4}\)</span>‘, date): return ’Single Years with Comma’ # Match incomplete date formats like “1803-1902 /” or “1969 /” elif re.match(r’^-?/<span class="math inline">\(', date) or re.match(r'^\d{4}\s?/\)</span>‘, date): return ’Incomplete Date Range’ # Match single years followed by periods like “1872-1923.” elif re.match(r’^-?[.]<span class="math inline">\(', date) or re.match(r'^\d{4}\s?[.]\)</span>‘, date): return ’Single Year with End Punctuation’ # Match dates with multiple dashes like “1772–2007” elif re.match(r’^–<span class="math inline">\(', date):
-        return 'Date Range with Multiple Dashes'
-    # Match improper date formatting with no delimiters like "18801890", "19071922"
-    elif re.match(r'^\d{8}\)</span>‘, date): return ’Dates with Missing Delimiters’ # Match shorter improper formats like “18251838” or “900-1834” elif re.match(r’^-$‘, date): return ’Improper Date Range’ else: return ‘Other Unspecified Pattern’</p>
+    elif re.match(r'^\d{4}-\d{4}\s?[.:]\)</span>‘, date): return ’Date Range with End Punctuation’ # Match date ranges with semicolons and indexes like “1800-1860; index,1802-1881” elif</p>
+<pre><code>elif re.match(r'^\d{4}-\d{4};\s?index,\d{4}-\d{4}$', date):
+    return 'Date Range with Semicolon and Index'
+# Match single years with commas like "1829, 1839"
+elif re.match(r'^\d{4},\s?\d{4}$', date):
+    return 'Single Years with Comma'
+# Match incomplete date formats like "1803-1902 /" or "1969 /"
+elif re.match(r'^\d{4}-\d{4}\s?/$', date) or re.match(r'^\d{4}\s?/$', date):
+    return 'Incomplete Date Range'
+# Match single years followed by periods like "1872-1923."
+elif re.match(r'^\d{4}-\d{4}\s?[.]$', date) or re.match(r'^\d{4}\s?[.]$', date):
+    return 'Single Year with End Punctuation'
+# Match dates with multiple dashes like "1772--2007"
+elif re.match(r'^\d{4}--\d{4}$', date):
+    return 'Date Range with Multiple Dashes'
+# Match improper date formatting with no delimiters like "18801890", "19071922"
+elif re.match(r'^\d{8}$', date):
+    return 'Dates with Missing Delimiters'
+# Match shorter improper formats like "18251838" or "900-1834"
+elif re.match(r'^\d{3,4}-\d{3,4}$', date):
+    return 'Improper Date Range'
+else:
+    return 'Other Unspecified Pattern'</code></pre>
 </section>
-<section id="section-3" class="level1">
+<section id="section-9" class="level1">
 <h1>%%</h1>
 </section>
 <section id="step-1-filter-the-dataframe-to-focus-only-on-rows-where-the-original-date_pattern-is-other" class="level1">
@@ -381,7 +501,7 @@ unique_patterns_in_other = df_other['245\)</span>f-Inclusive dates’].nunique()
 <h1>Step 5: View specific examples of rows with the “Date Range with Commas” pattern</h1>
 <p>date_range_with_commas = df_other[df_other[‘Other_pattern’] == ‘Date Range with Commas’] print(“of ‘Date Range with Commas’ pattern:”) print(date_range_with_commas[[‘245$f-Inclusive dates’]].head())</p>
 </section>
-<section id="section-4" class="level1">
+<section id="section-10" class="level1">
 <h1>%%</h1>
 
 
