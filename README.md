@@ -1,18 +1,28 @@
-# BYUI DS Portfolio Template
-## Building a Quarto Portfolo
+---
+title: "Karen L Castillo - Data Science Portfolio"
+format:
+  html:
+    theme: cosmo
+    toc: true
+---
 
-A template for a portfolio developed with Quarto and hosted on GitHub.
+# 👋 About Me
+I'm **Karen Castillo**, a Data Science student at **BYU–Idaho**, passionate about turning raw data into insights.  
+I enjoy working with Python, Power BI, SQL, and teaching statistical concepts.
 
-This is all configured so you only need to edit the source files in Quarto (.qmd). The website is generated and hosted automatically by GitHub.
+# 📄 Resume
+[📄 View my resume (PDF)](Karen%20Castillo%20Resume%204-25%20(3).pdf)
 
-## Using this template
+# 💼 Projects
 
-1. Click on green button "Use this Tempalte" -> "Create a new Repo"
+## 🧹 FamilySearch Data Quality App
+Cleaned 10K+ rows using Polars + Pandas, automated missing value detection, and built a Streamlit app to visualize data quality in real time.
 
-1. Choose a name for your repository
+## 📊 University Dashboarding (BYU-I)
+Built multiple Power BI dashboards and custom SQL queries to support decision-making across university departments.
 
-1. Important: check 'Include all branches' when creating the repository (because we will need the gh-pages branch to host the website).
+# 📫 Contact
+- **Email:** [krnl141198@gmail.com](mailto:krnl141198@gmail.com)  
+- **LinkedIn:** [linkedin.com/in/karen-l-castillo](https://linkedin.com/in/karen-l-castillo)  
+- **GitHub:** [github.com/karenlc4](https://github.com/karenlc4)
 
-1. Once your repo is created, remember to update the links to your GitHub repo in _quarto.yml, replacing every instance 'your_name'.
-
-1. The first time you publish to your repo use this command line string `quarto publish gh-pages` in the vs code terminal.
