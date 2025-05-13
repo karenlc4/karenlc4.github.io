@@ -1,10 +1,4 @@
----
-title: "Karen L Castillo - Data Science Portfolio"
-format:
-  html:
-    theme: cosmo
-    toc: true
----
+
 
 # 👋 About Me
 I'm **Karen Castillo**, a Data Science student at **BYU–Idaho**, passionate about turning raw data into insights.  
